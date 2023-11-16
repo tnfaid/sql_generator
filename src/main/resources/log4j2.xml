@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Configuration status="WARN">
+	<Appenders>
+		<RollingFile name="TdrAppender"
+			fileName="logs/Generator_SQL.log"
+			filePattern="logs/Generator_SQL_%d{yyyyMMdd_HH}.log">
+			<PatternLayout>
+				<Pattern>%d|%m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+		</RollingFile>
+		<RollingFile name="DebugAppender"
+					 fileName="logs/debug.log"
+					 filePattern="logs/debug_%d{yyyyMMdd_HH}.log">
+			<PatternLayout>
+				<Pattern>%d|%p|%X{msisdn}|%m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" />
+			</Policies>
+		</RollingFile>
+		<Console name="RootConsole" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger - %msg%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="tdr" level="info" additivity="false">
+			<AppenderRef ref="TdrAppender" />
+		</Logger>
+		<Logger name="debugger" level="debug" additivity="false">
+			<AppenderRef ref="DebugAppender" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="RootConsole" />
+		</Root>
+	</Loggers>
+</Configuration>
